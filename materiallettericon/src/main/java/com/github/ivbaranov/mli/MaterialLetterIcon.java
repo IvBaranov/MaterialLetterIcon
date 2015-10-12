@@ -194,4 +194,59 @@ public class MaterialLetterIcon extends View {
         TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, resources.getDisplayMetrics());
     return (int) px;
   }
+
+  /**
+   * Builder.
+   */
+  public static final class Builder {
+    private final Context context;
+
+    private int mCircleColor = DEFAULT_CIRCLE_COLOR;
+    private String mLetter;
+    private int mLetterColor = DEFAULT_LETTER_COLOR;
+    private int mLetterSize = DEFAULT_LETTER_SIZE;
+    private Typeface mLetterTypeface;
+
+    public Builder(Context context) {
+      this.context = context;
+      this.mLetterTypeface =
+          Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
+    }
+
+    public Builder circleColor(int color) {
+      this.mCircleColor = color;
+      return this;
+    }
+
+    public Builder letter(String letter) {
+      this.mLetter = letter;
+      return this;
+    }
+
+    public Builder letterColor(int color) {
+      this.mLetterColor = color;
+      return this;
+    }
+
+    public Builder letterSize(int size) {
+      this.mLetterSize = size;
+      return this;
+    }
+
+    public Builder letterTypeface(Typeface typeface) {
+      this.mLetterTypeface = typeface;
+      return this;
+    }
+
+    public MaterialLetterIcon create() {
+      MaterialLetterIcon icon = new MaterialLetterIcon(context);
+      icon.setCircleColor(mCircleColor);
+      icon.setLetter(mLetter);
+      icon.setLetterColor(mLetterColor);
+      icon.setLetterSize(mLetterSize);
+      icon.setLetterTypeface(mLetterTypeface);
+
+      return icon;
+    }
+  }
 }
