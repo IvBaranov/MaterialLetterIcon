@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="MaterialLetterIcon">
-        <attr name="mli_circle_color" format="integer" />
+        <attr name="mli_circle_color" format="color" />
         <attr name="mli_letter" format="string" />
-        <attr name="mli_letter_color" format="integer" />
+        <attr name="mli_letter_color" format="color" />
         <attr name="mli_letter_size" format="integer" />
     </declare-styleable>
 </resources>
