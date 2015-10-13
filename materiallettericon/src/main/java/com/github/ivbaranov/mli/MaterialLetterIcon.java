@@ -17,6 +17,8 @@ public class MaterialLetterIcon extends View {
   private final static int DEFAULT_CIRCLE_COLOR = Color.BLACK;
   private final static int DEFAULT_LETTER_COLOR = Color.WHITE;
   private final static int DEFAULT_LETTER_SIZE = 26;
+  private final static String DEFAULT_FONT_PATH = "fonts/Roboto-Light.ttf";
+  private final static int DEFAULT_LETTERS_NUMBER = 1;
   private final static Rect textBounds = new Rect();
 
   private Context context;
@@ -26,6 +28,7 @@ public class MaterialLetterIcon extends View {
   private String mLetter;
   private int mLetterColor;
   private int mLetterSize;
+  private int mLettersNumber;
 
   public MaterialLetterIcon(Context context) {
     super(context);
@@ -58,6 +61,7 @@ public class MaterialLetterIcon extends View {
    * <li>circle color = black</li>
    * <li>letter color = white</li>
    * <li>letter size = 26 sp</li>
+   * <li>number of letters = 1</li>
    * <li>typeface = Roboto Light</li>
    * </ul>
    */
@@ -67,6 +71,7 @@ public class MaterialLetterIcon extends View {
     mCircleColor = DEFAULT_CIRCLE_COLOR;
     mLetterColor = DEFAULT_LETTER_COLOR;
     mLetterSize = DEFAULT_LETTER_SIZE;
+    mLettersNumber = DEFAULT_LETTERS_NUMBER;
 
     mCirclePaint = new Paint();
     mCirclePaint.setStyle(Paint.Style.FILL);
@@ -74,8 +79,7 @@ public class MaterialLetterIcon extends View {
 
     mLetterPaint = new Paint();
     mLetterPaint.setAntiAlias(true);
-    mLetterPaint.setTypeface(
-        Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf"));
+    mLetterPaint.setTypeface(Typeface.createFromAsset(context.getAssets(), DEFAULT_FONT_PATH));
 
     if (!isInEditMode() && attrs != null) {
       initAttributes(context, attrs);
@@ -86,16 +90,18 @@ public class MaterialLetterIcon extends View {
     TypedArray attr = getTypedArray(context, attributeSet, R.styleable.MaterialLetterIcon);
     if (attr != null) {
       try {
-        mCircleColor = attr.getColor(R.styleable.MaterialLetterIcon_mli_circle_color,
-            DEFAULT_CIRCLE_COLOR);
+        mCircleColor =
+            attr.getColor(R.styleable.MaterialLetterIcon_mli_circle_color, DEFAULT_CIRCLE_COLOR);
         String attrLetter = attr.getString(R.styleable.MaterialLetterIcon_mli_letter);
         if (attrLetter != null) {
           setLetter(attrLetter);
         }
-        mLetterColor = attr.getColor(R.styleable.MaterialLetterIcon_mli_letter_color,
-            DEFAULT_LETTER_COLOR);
+        mLetterColor =
+            attr.getColor(R.styleable.MaterialLetterIcon_mli_letter_color, DEFAULT_LETTER_COLOR);
         mLetterSize =
             attr.getInt(R.styleable.MaterialLetterIcon_mli_letter_size, DEFAULT_LETTER_SIZE);
+        mLettersNumber =
+            attr.getInt(R.styleable.MaterialLetterIcon_mli_letters_number, DEFAULT_LETTERS_NUMBER);
       } finally {
         attr.recycle();
       }
@@ -131,7 +137,7 @@ public class MaterialLetterIcon extends View {
   private void drawLetter(Canvas canvas, float cx, float cy) {
     mLetterPaint.setColor(mLetterColor);
     mLetterPaint.setTextSize(spToPx(mLetterSize, context.getResources()));
-    mLetterPaint.getTextBounds(mLetter, 0, 1, textBounds);
+    mLetterPaint.getTextBounds(mLetter, 0, mLettersNumber, textBounds);
     canvas.drawText(mLetter, cx - textBounds.exactCenterX(), cy - textBounds.exactCenterY(),
         mLetterPaint);
   }
@@ -147,12 +153,14 @@ public class MaterialLetterIcon extends View {
   }
 
   /**
-   * Set a letter.
+   * Set letters.
    *
-   * @param string a string to take first significant letter from
+   * @param string a string to take first significant letter from or specified number of letters
    */
   public void setLetter(String string) {
-    this.mLetter = String.valueOf(string.replaceAll("\\s+", "").charAt(0)).toUpperCase();
+    this.mLetter = String.valueOf(string.replaceAll("\\s+", "") //
+        .substring(0, mLettersNumber)) //
+        .toUpperCase();
     invalidate();
   }
 
@@ -173,6 +181,16 @@ public class MaterialLetterIcon extends View {
    */
   public void setLetterSize(int size) {
     this.mLetterSize = size;
+    invalidate();
+  }
+
+  /**
+   * Set number of letters to be displayed.
+   *
+   * @param num number of letters
+   */
+  public void setLettersNumber(int num) {
+    this.mLettersNumber = num;
     invalidate();
   }
 
@@ -205,12 +223,12 @@ public class MaterialLetterIcon extends View {
     private String mLetter;
     private int mLetterColor = DEFAULT_LETTER_COLOR;
     private int mLetterSize = DEFAULT_LETTER_SIZE;
+    private int mLettersNumber = DEFAULT_LETTERS_NUMBER;
     private Typeface mLetterTypeface;
 
     public Builder(Context context) {
       this.context = context;
-      this.mLetterTypeface =
-          Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
+      this.mLetterTypeface = Typeface.createFromAsset(context.getAssets(), DEFAULT_FONT_PATH);
     }
 
     public Builder circleColor(int color) {
@@ -233,6 +251,11 @@ public class MaterialLetterIcon extends View {
       return this;
     }
 
+    public Builder lettersNumber(int num) {
+      this.mLettersNumber = num;
+      return this;
+    }
+
     public Builder letterTypeface(Typeface typeface) {
       this.mLetterTypeface = typeface;
       return this;
@@ -244,6 +267,7 @@ public class MaterialLetterIcon extends View {
       icon.setLetter(mLetter);
       icon.setLetterColor(mLetterColor);
       icon.setLetterSize(mLetterSize);
+      icon.setLettersNumber(mLettersNumber);
       icon.setLetterTypeface(mLetterTypeface);
 
       return icon;

@@ -7,6 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -23,19 +26,57 @@ public class MainActivity extends AppCompatActivity {
       "Nannie Nipp", "Ozella Otis", "Pauletta Poehler", "Roderick Rippy", "Sherril Sager",
       "Taneka Tenorio", "Treena Trentham", "Ulrike Uhlman", "Virgina Viau", "Willis Wysocki"
   };
+  private static final String[] countries = {
+      "Albania", "Australia", "Belgium", "Canada", "China", "Dominica", "Egypt", "Estonia",
+      "Finland", "France", "Germany", "Honduras", "Italy", "Japan", "Madagascar", "Netherlands",
+      "Norway", "Panama", "Portugal", "Romania", "Russia", "Slovakia", "Vatican", "Zimbabwe"
+  };
+  private static final int CONTACTS = 0;
+  private static final int COUNTRIES = 1;
   private static final Random RANDOM = new Random();
+
+  private RecyclerView recyclerView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-    setupRecyclerView(recyclerView);
+    recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+    setupRecyclerView();
   }
 
-  private void setupRecyclerView(RecyclerView recyclerView) {
+  @Override public boolean onCreateOptionsMenu(Menu menu) {
+    final MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.menu, menu);
+
+    return super.onCreateOptionsMenu(menu);
+  }
+
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.contacts:
+        setContactsAdapter(desuNoto);
+        return true;
+      case R.id.countries:
+        setCountriesAdapter(countries);
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
+  }
+
+  private void setupRecyclerView() {
     recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-    recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(this, Arrays.asList(desuNoto)));
+    setContactsAdapter(desuNoto);
+  }
+
+  private void setContactsAdapter(String[] array) {
+    recyclerView.setAdapter(
+        new SimpleStringRecyclerViewAdapter(this, Arrays.asList(array), CONTACTS));
+  }
+
+  private void setCountriesAdapter(String[] array) {
+    recyclerView.setAdapter(
+        new SimpleStringRecyclerViewAdapter(this, Arrays.asList(array), COUNTRIES));
   }
 
   public static class SimpleStringRecyclerViewAdapter
@@ -45,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
     private int mBackground;
     private List<String> mValues;
     private int[] mMaterialColors;
+    private int mType;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
       public String mBoundString;
@@ -69,11 +111,12 @@ public class MainActivity extends AppCompatActivity {
       return mValues.get(position);
     }
 
-    public SimpleStringRecyclerViewAdapter(Context context, List<String> items) {
+    public SimpleStringRecyclerViewAdapter(Context context, List<String> items, int type) {
       context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
       mMaterialColors = context.getResources().getIntArray(R.array.colors);
       mBackground = mTypedValue.resourceId;
       mValues = items;
+      mType = type;
     }
 
     @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -84,10 +127,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override public void onBindViewHolder(final ViewHolder holder, int position) {
+      switch (mType) {
+        case CONTACTS:
+          holder.mIcon.setLettersNumber(1);
+          holder.mIcon.setLetterSize(26);
+          break;
+        case COUNTRIES:
+          holder.mIcon.setLettersNumber(2);
+          holder.mIcon.setLetterSize(18);
+          break;
+      }
       holder.mBoundString = mValues.get(position);
       holder.mIcon.setCircleColor(mMaterialColors[RANDOM.nextInt(mMaterialColors.length)]);
-      holder.mIcon.setLetter(mValues.get(position));
       holder.mTextView.setText(mValues.get(position));
+      holder.mIcon.setLetter(mValues.get(position));
     }
 
     @Override public int getItemCount() {
