@@ -19,7 +19,7 @@ allprojects {
     }
 }
 dependencies {
-    compile 'com.github.ivbaranov:MaterialLetterIcon:0.1.0'
+    compile 'com.github.ivbaranov:MaterialLetterIcon:0.2.0'
 }
 ```
 
@@ -39,7 +39,8 @@ Or static initializer (see xml attributes below for customization):
 
 ```java
 MaterialLetterIcon icon = new MaterialLetterIcon.Builder(context) //
-            .circleColor(getResources().getColor(R.color.circle_color))
+            .shapeColor(getResources().getColor(R.color.circle_color))
+            .setShapeType(MaterialLetterIcon.SHAPE_CIRCLE)
             .letter("S")
             .letterColor(getResources().getColor(R.color.letter_color))
             .letterSize(26)
@@ -52,7 +53,8 @@ MaterialLetterIcon icon = new MaterialLetterIcon.Builder(context) //
 Configure using xml attributes or setters in code:
 
 ```java
-app:mli_circle_color="@color/black"     // circle color
+app:mli_shape_color="@color/black"      // shape color
+app:mli_shape_type="circle"             // shape type
 app:mli_letter=""                       // letter or string to get first letter from
 app:mli_letter_color="@color/white"     // letter color
 app:mli_letter_size="26"                // letter size SP
