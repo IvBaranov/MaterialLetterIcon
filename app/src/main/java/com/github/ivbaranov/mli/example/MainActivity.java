@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
           break;
       }
       holder.mBoundString = mValues.get(position);
-      holder.mIcon.setCircleColor(mMaterialColors[RANDOM.nextInt(mMaterialColors.length)]);
+      holder.mIcon.setShapeColor(mMaterialColors[RANDOM.nextInt(mMaterialColors.length)]);
       holder.mTextView.setText(mValues.get(position));
       holder.mIcon.setLetter(mValues.get(position));
     }
