@@ -4,7 +4,6 @@ Material Letter Icon
 Material letter icon with circle background. Replicates android L contacts icon view.
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaterialLetterIcon-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2633)
-![Jitpack version](https://img.shields.io/github/release/IvBaranov/MaterialLetterIcon.svg?label=JitPack)
 
 ![Library](images/library.png)
 ![Lollipop](images/lollipop.png)
