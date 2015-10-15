@@ -31,7 +31,7 @@ Usage
 Declare in XML (see xml attributes below for customization):
 
 ```xml
-<com.github.ivbaranov.mfb.MaterialLetterIcon
+<com.github.ivbaranov.mli.MaterialLetterIcon
     android:layout_width="@dimen/letter_icon_size"
     android:layout_height="@dimen/letter_icon_size" />
 ```
