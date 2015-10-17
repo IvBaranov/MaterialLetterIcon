@@ -189,6 +189,10 @@ public class MaterialLetterIcon extends View {
    * @param string a string to take first significant letter from or specified number of letters
    */
   public void setLetter(String string) {
+    if (string == null) {
+      return;
+    }
+
     this.mLetter = String.valueOf(string.replaceAll("\\s+", ""));
     this.mLetter =  mLetter.substring(0, mLettersNumber > mLetter.length() ? mLetter.length() : mLettersNumber)
         .toUpperCase();
