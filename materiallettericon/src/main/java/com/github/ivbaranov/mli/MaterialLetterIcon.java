@@ -239,6 +239,38 @@ public class MaterialLetterIcon extends View {
     invalidate();
   }
 
+  public Paint getShapePaint() {
+    return mShapePaint;
+  }
+
+  public Paint getLetterPaint() {
+    return mLetterPaint;
+  }
+
+  public int getShapeColor() {
+    return mShapeColor;
+  }
+
+  public int getShapeType() {
+    return mShapeType;
+  }
+
+  public String getLetter() {
+    return mLetter;
+  }
+
+  public int getLetterColor() {
+    return mLetterColor;
+  }
+
+  public int getLetterSize() {
+    return mLetterSize;
+  }
+
+  public int getLettersNumber() {
+    return mLettersNumber;
+  }
+
   /**
    * Convert sp to pixel.
    */
