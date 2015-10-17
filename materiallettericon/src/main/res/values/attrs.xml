@@ -10,5 +10,6 @@
     <attr name="mli_letter_color" format="color" />
     <attr name="mli_letter_size" format="integer" />
     <attr name="mli_letters_number" format="integer" />
+    <attr name="mli_initials" format="boolean" />
   </declare-styleable>
 </resources>

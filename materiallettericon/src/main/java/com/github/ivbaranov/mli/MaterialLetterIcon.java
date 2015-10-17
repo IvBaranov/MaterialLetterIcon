@@ -25,6 +25,7 @@ public class MaterialLetterIcon extends View {
   private final static int DEFAULT_LETTER_SIZE = 26;
   private final static String DEFAULT_FONT_PATH = "fonts/Roboto-Light.ttf";
   private final static int DEFAULT_LETTERS_NUMBER = 1;
+  private final static boolean DEFAULT_INITIALS_STATE = true;
 
   private Context context;
   private Paint mShapePaint;
@@ -35,6 +36,8 @@ public class MaterialLetterIcon extends View {
   private int mLetterColor;
   private int mLetterSize;
   private int mLettersNumber;
+  private boolean mInitials;
+  private String originalLetter;
 
   public MaterialLetterIcon(Context context) {
     super(context);
@@ -55,7 +58,7 @@ public class MaterialLetterIcon extends View {
   }
 
   public MaterialLetterIcon(Context context, AttributeSet attrs, int defStyleAttr,
-      int defStyleRes) {
+                            int defStyleRes) {
     super(context, attrs, defStyleAttr);
 
     init(context, attrs, defStyleAttr, defStyleRes);
@@ -100,9 +103,10 @@ public class MaterialLetterIcon extends View {
       try {
         mShapeColor =
             attr.getColor(R.styleable.MaterialLetterIcon_mli_shape_color, DEFAULT_SHAPE_COLOR);
-        String attrLetter = attr.getString(R.styleable.MaterialLetterIcon_mli_letter);
-        if (attrLetter != null) {
-          setLetter(attrLetter);
+        mInitials = attr.getBoolean(R.styleable.MaterialLetterIcon_mli_initials, DEFAULT_INITIALS_STATE);
+        originalLetter = attr.getString(R.styleable.MaterialLetterIcon_mli_letter);
+        if (originalLetter != null) {
+          setLetter(originalLetter);
         }
         mShapeType = attr.getInt(R.styleable.MaterialLetterIcon_mli_shape_type, DEFAULT_SHAPE);
         mLetterColor =
@@ -121,7 +125,8 @@ public class MaterialLetterIcon extends View {
     return context.obtainStyledAttributes(attributeSet, attr, 0, 0);
   }
 
-  @Override protected void onDraw(Canvas canvas) {
+  @Override
+  protected void onDraw(Canvas canvas) {
     int viewWidthHalf = this.getMeasuredWidth() / 2;
     int viewHeightHalf = this.getMeasuredHeight() / 2;
 
@@ -157,7 +162,7 @@ public class MaterialLetterIcon extends View {
   private void drawLetter(Canvas canvas, float cx, float cy) {
     mLetterPaint.setColor(mLetterColor);
     mLetterPaint.setTextSize(spToPx(mLetterSize, context.getResources()));
-    mLetterPaint.getTextBounds(mLetter, 0 , mLettersNumber > mLetter.length() ? mLetter.length() : mLettersNumber, textBounds);
+    mLetterPaint.getTextBounds(mLetter, 0, mLettersNumber > mLetter.length() ? mLetter.length() : mLettersNumber, textBounds);
     canvas.drawText(mLetter, cx - textBounds.exactCenterX(), cy - textBounds.exactCenterY(),
         mLetterPaint);
   }
@@ -176,7 +181,7 @@ public class MaterialLetterIcon extends View {
    * Sets shape type.
    *
    * @param type one of shapes to draw: {@code MaterialLetterIcon.SHAPE_CIRCLE} or {@code
-   * MaterialLetterIcon.SHAPE_RECT}
+   *             MaterialLetterIcon.SHAPE_RECT}
    */
   public void setShapeType(int type) {
     this.mShapeType = type;
@@ -189,12 +194,23 @@ public class MaterialLetterIcon extends View {
    * @param string a string to take first significant letter from or specified number of letters
    */
   public void setLetter(String string) {
-    if (string == null) {
+    if (string == null || string.isEmpty()) {
       return;
     }
 
-    this.mLetter = String.valueOf(string.replaceAll("\\s+", ""));
-    this.mLetter =  mLetter.substring(0, mLettersNumber > mLetter.length() ? mLetter.length() : mLettersNumber)
+    this.originalLetter = string;
+
+    if (mInitials) {
+      String initials[] = string.split("\\s+");
+      StringBuilder initialsPlain = new StringBuilder(mLettersNumber);
+      for (String initial : initials) {
+        initialsPlain.append(initial.substring(0, 1));
+      }
+      this.mLetter = initialsPlain.toString();
+    } else {
+      this.mLetter = String.valueOf(string.replaceAll("\\s+", ""));
+    }
+    this.mLetter = mLetter.substring(0, mLettersNumber > mLetter.length() ? mLetter.length() : mLettersNumber)
         .toUpperCase();
     invalidate();
   }
@@ -239,6 +255,11 @@ public class MaterialLetterIcon extends View {
     invalidate();
   }
 
+  public void setInitials(boolean state) {
+    this.mInitials = state;
+    setLetter(originalLetter);
+  }
+
   public Paint getShapePaint() {
     return mShapePaint;
   }
@@ -271,6 +292,10 @@ public class MaterialLetterIcon extends View {
     return mLettersNumber;
   }
 
+  public boolean isInitials() {
+    return mInitials;
+  }
+
   /**
    * Convert sp to pixel.
    */
@@ -293,6 +318,7 @@ public class MaterialLetterIcon extends View {
     private int mLetterSize = DEFAULT_LETTER_SIZE;
     private int mLettersNumber = DEFAULT_LETTERS_NUMBER;
     private Typeface mLetterTypeface;
+    private boolean mInitials = DEFAULT_INITIALS_STATE;
 
     public Builder(Context context) {
       this.context = context;
@@ -334,6 +360,11 @@ public class MaterialLetterIcon extends View {
       return this;
     }
 
+    public Builder initials(boolean state) {
+      this.mInitials = state;
+      return this;
+    }
+
     public MaterialLetterIcon create() {
       MaterialLetterIcon icon = new MaterialLetterIcon(context);
       icon.setShapeColor(mShapeColor);
@@ -343,6 +374,7 @@ public class MaterialLetterIcon extends View {
       icon.setLetterSize(mLetterSize);
       icon.setLettersNumber(mLettersNumber);
       icon.setLetterTypeface(mLetterTypeface);
+      icon.setInitials(mInitials);
 
       return icon;
     }
