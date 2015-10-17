@@ -11,6 +11,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+
 import com.example.ivbaranov.ma.R;
 
 public class MaterialLetterIcon extends View {
@@ -156,7 +157,7 @@ public class MaterialLetterIcon extends View {
   private void drawLetter(Canvas canvas, float cx, float cy) {
     mLetterPaint.setColor(mLetterColor);
     mLetterPaint.setTextSize(spToPx(mLetterSize, context.getResources()));
-    mLetterPaint.getTextBounds(mLetter, 0, mLettersNumber, textBounds);
+    mLetterPaint.getTextBounds(mLetter, 0 , mLettersNumber > mLetter.length() ? mLetter.length() : mLettersNumber, textBounds);
     canvas.drawText(mLetter, cx - textBounds.exactCenterX(), cy - textBounds.exactCenterY(),
         mLetterPaint);
   }
@@ -188,8 +189,8 @@ public class MaterialLetterIcon extends View {
    * @param string a string to take first significant letter from or specified number of letters
    */
   public void setLetter(String string) {
-    this.mLetter = String.valueOf(string.replaceAll("\\s+", "") //
-        .substring(0, mLettersNumber)) //
+    this.mLetter = String.valueOf(string.replaceAll("\\s+", ""));
+    this.mLetter =  mLetter.substring(0, mLettersNumber > mLetter.length() ? mLetter.length() : mLettersNumber)
         .toUpperCase();
     invalidate();
   }
