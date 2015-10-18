@@ -74,6 +74,8 @@ public class MaterialLetterIcon extends View {
    * <li>letter size = 26 sp</li>
    * <li>number of letters = 1</li>
    * <li>typeface = Roboto Light</li>
+   * <li>initials = false</li>
+   * <li>initials number = 2</li>
    * </ul>
    */
   private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -202,7 +204,7 @@ public class MaterialLetterIcon extends View {
   /**
    * Set letters.
    *
-   * @param string a string to take first significant letter from or specified number of letters
+   * @param string a string to take letters from
    */
   public void setLetter(String string) {
     if (string == null || string.isEmpty()) {
@@ -232,7 +234,7 @@ public class MaterialLetterIcon extends View {
   }
 
   /**
-   * Set a letter color.
+   * Set letters color.
    *
    * @param color a color integer associated with a particular resource id
    */
@@ -242,7 +244,7 @@ public class MaterialLetterIcon extends View {
   }
 
   /**
-   * Set a letter size.
+   * Set letters size.
    *
    * @param size size of letter in SP
    */
@@ -262,7 +264,7 @@ public class MaterialLetterIcon extends View {
   }
 
   /**
-   * Set a letter typeface.
+   * Set letters typeface.
    *
    * @param typeface a typeface to apply to letter
    */
@@ -271,13 +273,23 @@ public class MaterialLetterIcon extends View {
     invalidate();
   }
 
+  /**
+   * Set initials state.
+   *
+   * @param state if true, gets first letter of {@code initialsNumber} words in provided string
+   */
   public void setInitials(boolean state) {
     this.mInitials = state;
     setLetter(mOriginalLetter);
   }
 
-  public void setInitialsNumber(int mInitialsNumber) {
-    this.mInitialsNumber = mInitialsNumber;
+  /**
+   * Set number of initials to show.
+   *
+   * @param initialsNumber number of initials to show
+   */
+  public void setInitialsNumber(int initialsNumber) {
+    this.mInitialsNumber = initialsNumber;
     setLetter(mOriginalLetter);
   }
 

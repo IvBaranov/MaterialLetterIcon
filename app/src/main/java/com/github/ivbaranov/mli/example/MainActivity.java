@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
           break;
         case COUNTRIES:
           holder.mIcon.setLettersNumber(3);
-          holder.mIcon.setLetterSize(18);
+          holder.mIcon.setLetterSize(16);
           break;
       }
       holder.mBoundString = mValues.get(position);
