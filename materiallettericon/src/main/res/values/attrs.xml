@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <declare-styleable name="MaterialLetterIcon">
-    <attr name="mli_shape_color" format="color" />
+    <attr name="mli_shape_color" format="color"/>
     <attr name="mli_shape_type" format="enum">
-      <enum name="circle" value="0" />
-      <enum name="rect" value="1" />
+      <enum name="circle" value="0"/>
+      <enum name="rect" value="1"/>
     </attr>
-    <attr name="mli_letter" format="string" />
-    <attr name="mli_letter_color" format="color" />
-    <attr name="mli_letter_size" format="integer" />
-    <attr name="mli_letters_number" format="integer" />
+    <attr name="mli_letter" format="string"/>
+    <attr name="mli_letter_color" format="color"/>
+    <attr name="mli_letter_size" format="integer"/>
+    <attr name="mli_letters_number" format="integer"/>
+    <attr name="mli_initials" format="boolean"/>
+    <attr name="mli_initials_number" format="integer"/>
   </declare-styleable>
 </resources>

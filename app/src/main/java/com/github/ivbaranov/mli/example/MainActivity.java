@@ -129,12 +129,13 @@ public class MainActivity extends AppCompatActivity {
     @Override public void onBindViewHolder(final ViewHolder holder, int position) {
       switch (mType) {
         case CONTACTS:
-          holder.mIcon.setLettersNumber(1);
-          holder.mIcon.setLetterSize(26);
+          holder.mIcon.setInitials(true);
+          holder.mIcon.setInitialsNumber(2);
+          holder.mIcon.setLetterSize(18);
           break;
         case COUNTRIES:
-          holder.mIcon.setLettersNumber(2);
-          holder.mIcon.setLetterSize(18);
+          holder.mIcon.setLettersNumber(3);
+          holder.mIcon.setLetterSize(16);
           break;
       }
       holder.mBoundString = mValues.get(position);
