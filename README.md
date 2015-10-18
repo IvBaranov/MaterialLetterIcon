@@ -19,7 +19,7 @@ allprojects {
     }
 }
 dependencies {
-    compile 'com.github.ivbaranov:MaterialLetterIcon:0.2.0'
+    compile 'com.github.ivbaranov:MaterialLetterIcon:0.2.1'
 }
 ```
 
@@ -46,6 +46,8 @@ MaterialLetterIcon icon = new MaterialLetterIcon.Builder(context) //
             .letterSize(26)
             .lettersNumber(1)
             .letterTypeface(yourTypeface)
+            .initials(false)
+            .initialsNumber(2)
             .create();
 ```
 
@@ -59,6 +61,8 @@ app:mli_letter=""                       // letter or string to get first letter 
 app:mli_letter_color="@color/white"     // letter color
 app:mli_letter_size="26"                // letter size SP
 app:mli_letters_number="1"              // number of letters to get from string
+app:mli_initials="false"                // turn on initials mode
+app:mli_initials_number="2"             // number of initials to be showed
 ```
 
 
