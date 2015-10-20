@@ -336,7 +336,7 @@ public class MaterialLetterIcon extends View {
   /**
    * Convert sp to pixel.
    */
-  public static int spToPx(float sp, Resources resources) {
+  private static int spToPx(float sp, Resources resources) {
     float px =
         TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, resources.getDisplayMetrics());
     return (int) px;
