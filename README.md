@@ -3,7 +3,7 @@ Material Letter Icon
 
 Material letter icon with circle background. Replicates android L contacts icon view.
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaterialLetterIcon-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2633)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaterialLetterIcon-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2633) [![Build Status](https://travis-ci.org/IvBaranov/MaterialLetterIcon.svg)](https://travis-ci.org/IvBaranov/MaterialLetterIcon)
 
 ![Library](images/library.png)
 ![Lollipop](images/lollipop.png)
@@ -13,7 +13,7 @@ Gradle
 
 ```groovy
 allprojects {
-    repositories { 
+    repositories {
         jcenter()
         maven { url "https://jitpack.io" }
     }
