@@ -1,5 +1,5 @@
 Material Letter Icon
-===============
+====================
 
 Material letter icon with circle background. Replicates android L contacts icon view.
 
@@ -8,19 +8,11 @@ Material letter icon with circle background. Replicates android L contacts icon 
 ![Library](images/library.png)
 ![Lollipop](images/lollipop.png)
 ![Library_countries](images/library_countries.png)
-Gradle
--------------------------
+Download
+--------
 
 ```groovy
-allprojects {
-    repositories {
-        jcenter()
-        maven { url "https://jitpack.io" }
-    }
-}
-dependencies {
-    compile 'com.github.ivbaranov:MaterialLetterIcon:0.2.1'
-}
+compile 'com.github.ivbaranov:MaterialLetterIcon:0.2.1'
 ```
 
 
@@ -67,11 +59,11 @@ app:mli_initials_number="2"             // number of initials to be showed
 
 
 Developed By
---------------------
+------------
 Ivan Baranov
 
 License
------------
+-------
 
 ```
 Copyright 2015 Ivan Baranov
