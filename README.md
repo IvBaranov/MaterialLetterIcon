@@ -1,7 +1,7 @@
 Material Letter Icon
 ====================
 
-Material letter icon with circle background. Replicates android L contacts icon view.
+Material letter icon with shape background. Replicates android L contacts icon view.
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaterialLetterIcon-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2633) [![Build Status](https://travis-ci.org/IvBaranov/MaterialLetterIcon.svg)](https://travis-ci.org/IvBaranov/MaterialLetterIcon)
 
