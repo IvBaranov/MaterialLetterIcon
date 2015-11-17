@@ -7,7 +7,12 @@ Material letter icon with shape background. Replicates android L contacts icon v
 
 ![Library](images/library.png)
 ![Lollipop](images/lollipop.png)
+
+Variations
+----------
 ![Library_countries](images/library_countries.png)
+![Library_countries_rect](images/library_countries_rect.png)
+
 Download
 --------
 
