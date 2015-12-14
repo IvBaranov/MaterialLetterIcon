@@ -52,13 +52,13 @@ MaterialLetterIcon icon = new MaterialLetterIcon.Builder(context) //
 Configure using xml attributes or setters in code:
 
 ```java
-app:mli_shape_color="@color/black"      // shape color
-app:mli_shape_type="circle"             // shape type
-app:mli_letter=""                       // letter or string to get first letter from
+app:mli_shape_color="@color/black"      // shape color resource
+app:mli_shape_type="circle"             // shape type (circle or rectangle)
+app:mli_letter=""                       // letter, string or initials to get letters from
 app:mli_letter_color="@color/white"     // letter color
 app:mli_letter_size="26"                // letter size SP
-app:mli_letters_number="1"              // number of letters to get from string
-app:mli_initials="false"                // turn on initials mode
+app:mli_letters_number="1"              // number of letters to get from `mli_letter`
+app:mli_initials="false"                // turn on initials mode (takes `mli_letters_number` of letters of each word in `mli_letter`)
 app:mli_initials_number="2"             // number of initials to be showed
 ```
 
