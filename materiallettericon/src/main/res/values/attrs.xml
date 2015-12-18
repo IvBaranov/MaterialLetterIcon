@@ -5,6 +5,7 @@
     <attr name="mli_shape_type" format="enum">
       <enum name="circle" value="0"/>
       <enum name="rect" value="1"/>
+      <enum name="round_rect" value="2"/>
     </attr>
     <attr name="mli_letter" format="string"/>
     <attr name="mli_letter_color" format="color"/>
@@ -12,5 +13,7 @@
     <attr name="mli_letters_number" format="integer"/>
     <attr name="mli_initials" format="boolean"/>
     <attr name="mli_initials_number" format="integer"/>
+    <attr name="mli_round_rect_rx" format="float"/>
+    <attr name="mli_round_rect_ry" format="float"/>
   </declare-styleable>
 </resources>

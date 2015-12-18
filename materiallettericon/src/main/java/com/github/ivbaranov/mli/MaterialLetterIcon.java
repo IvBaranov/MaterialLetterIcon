@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -16,6 +17,7 @@ import com.example.ivbaranov.ma.R;
 public class MaterialLetterIcon extends View {
   public final static int SHAPE_CIRCLE = 0;
   public final static int SHAPE_RECT = 1;
+  public final static int SHAPE_ROUND_RECT = 2;
   private final static Rect textBounds = new Rect();
 
   private final static int DEFAULT_SHAPE_COLOR = Color.BLACK;
@@ -25,7 +27,8 @@ public class MaterialLetterIcon extends View {
   private final static String DEFAULT_FONT_PATH = "fonts/Roboto-Light.ttf";
   private final static int DEFAULT_LETTERS_NUMBER = 1;
   private final static boolean DEFAULT_INITIALS_STATE = false;
-  private final static int DEFAULT_INITIALS_NUMBER = 2;
+  private final static int DEFAULT_INITIALS_NUMBER = 8;
+  private final static float DEFAULT_ROUND_RECT_RADIUS = 8;
 
   private Context context;
   private Paint mShapePaint;
@@ -39,6 +42,8 @@ public class MaterialLetterIcon extends View {
   private boolean mInitials;
   private int mInitialsNumber;
   private String mOriginalLetter;
+  private float mRoundRectRx;
+  private float mRoundRectRy;
 
   public MaterialLetterIcon(Context context) {
     super(context);
@@ -76,6 +81,8 @@ public class MaterialLetterIcon extends View {
    * <li>typeface = Roboto Light</li>
    * <li>initials = false</li>
    * <li>initials number = 2</li>
+   * <li>round-rect x radius = 8</li>
+   * <li>round-rect y radius = 8</li>
    * </ul>
    */
   private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -88,6 +95,8 @@ public class MaterialLetterIcon extends View {
     mLettersNumber = DEFAULT_LETTERS_NUMBER;
     mInitials = DEFAULT_INITIALS_STATE;
     mInitialsNumber = DEFAULT_INITIALS_NUMBER;
+    mRoundRectRx = DEFAULT_ROUND_RECT_RADIUS;
+    mRoundRectRy = DEFAULT_ROUND_RECT_RADIUS;
 
     mShapePaint = new Paint();
     mShapePaint.setStyle(Paint.Style.FILL);
@@ -123,6 +132,10 @@ public class MaterialLetterIcon extends View {
             attr.getInt(R.styleable.MaterialLetterIcon_mli_letter_size, DEFAULT_LETTER_SIZE);
         mLettersNumber =
             attr.getInt(R.styleable.MaterialLetterIcon_mli_letters_number, DEFAULT_LETTERS_NUMBER);
+        mRoundRectRx = attr.getFloat(R.styleable.MaterialLetterIcon_mli_round_rect_rx,
+            DEFAULT_ROUND_RECT_RADIUS);
+        mRoundRectRy = attr.getFloat(R.styleable.MaterialLetterIcon_mli_round_rect_ry,
+            DEFAULT_ROUND_RECT_RADIUS);
       } finally {
         attr.recycle();
       }
@@ -150,6 +163,8 @@ public class MaterialLetterIcon extends View {
       case SHAPE_RECT:
         drawRect(canvas, this.getMeasuredWidth(), this.getMeasuredWidth());
         break;
+      case SHAPE_ROUND_RECT:
+        drawRoundRect(canvas, this.getMeasuredWidth(), this.getMeasuredWidth());
     }
     if (mLetter != null) {
       drawLetter(canvas, viewWidthHalf, viewHeightHalf);
@@ -164,6 +179,11 @@ public class MaterialLetterIcon extends View {
   private void drawRect(Canvas canvas, int width, int height) {
     mShapePaint.setColor(mShapeColor);
     canvas.drawRect(0, 0, width, height, mShapePaint);
+  }
+
+  private void drawRoundRect(Canvas canvas, float width, float height) {
+    mShapePaint.setColor(mShapeColor);
+    canvas.drawRoundRect(new RectF(0, 0, width, height), mRoundRectRx, mRoundRectRy, mShapePaint);
   }
 
   private void drawLetter(Canvas canvas, float cx, float cy) {
@@ -293,6 +313,26 @@ public class MaterialLetterIcon extends View {
     setLetter(mOriginalLetter);
   }
 
+  /**
+   * Set the x-radius of the oval used to round the corners.
+   *
+   * @param rx x-radius of the oval
+   */
+  public void setRoundRectRx(float rx) {
+    this.mRoundRectRx = rx;
+    invalidate();
+  }
+
+  /**
+   * Set the y-radius of the oval used to round the corners.
+   *
+   * @param ry y-radius of the oval
+   */
+  public void setRoundRectRy(float ry) {
+    this.mRoundRectRy = ry;
+    invalidate();
+  }
+
   public Paint getShapePaint() {
     return mShapePaint;
   }
@@ -333,6 +373,14 @@ public class MaterialLetterIcon extends View {
     return mInitialsNumber;
   }
 
+  public float getmRoundRectRx() {
+    return mRoundRectRx;
+  }
+
+  public float getmRoundRectRy() {
+    return mRoundRectRy;
+  }
+
   /**
    * Convert sp to pixel.
    */
@@ -357,6 +405,8 @@ public class MaterialLetterIcon extends View {
     private Typeface mLetterTypeface;
     private boolean mInitials = DEFAULT_INITIALS_STATE;
     private int mInitialsNumber = DEFAULT_INITIALS_NUMBER;
+    private float mRoundRectRx = DEFAULT_ROUND_RECT_RADIUS;
+    private float mRoundRectRy = DEFAULT_ROUND_RECT_RADIUS;
 
     public Builder(Context context) {
       this.context = context;
@@ -408,6 +458,16 @@ public class MaterialLetterIcon extends View {
       return this;
     }
 
+    public Builder roundRectRx(float rx) {
+      this.mRoundRectRx = rx;
+      return this;
+    }
+
+    public Builder roundRectRy(float ry) {
+      this.mRoundRectRy = ry;
+      return this;
+    }
+
     public MaterialLetterIcon create() {
       MaterialLetterIcon icon = new MaterialLetterIcon(context);
       icon.setShapeColor(mShapeColor);
@@ -419,6 +479,8 @@ public class MaterialLetterIcon extends View {
       icon.setLetterTypeface(mLetterTypeface);
       icon.setInitials(mInitials);
       icon.setInitialsNumber(mInitialsNumber);
+      icon.setRoundRectRx(mRoundRectRx);
+      icon.setRoundRectRy(mRoundRectRy);
 
       return icon;
     }
