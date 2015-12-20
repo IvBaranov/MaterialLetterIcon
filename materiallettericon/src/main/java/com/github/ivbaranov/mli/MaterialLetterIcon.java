@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
@@ -18,6 +19,7 @@ public class MaterialLetterIcon extends View {
   public final static int SHAPE_CIRCLE = 0;
   public final static int SHAPE_RECT = 1;
   public final static int SHAPE_ROUND_RECT = 2;
+  public final static int SHAPE_TRIANGLE = 3;
   private final static Rect textBounds = new Rect();
 
   private final static int DEFAULT_SHAPE_COLOR = Color.BLACK;
@@ -165,6 +167,10 @@ public class MaterialLetterIcon extends View {
         break;
       case SHAPE_ROUND_RECT:
         drawRoundRect(canvas, this.getMeasuredWidth(), this.getMeasuredWidth());
+        break;
+      case SHAPE_TRIANGLE:
+        drawTriangle(canvas);
+        break;
     }
     if (mLetter != null) {
       drawLetter(canvas, viewWidthHalf, viewHeightHalf);
@@ -184,6 +190,19 @@ public class MaterialLetterIcon extends View {
   private void drawRoundRect(Canvas canvas, float width, float height) {
     mShapePaint.setColor(mShapeColor);
     canvas.drawRoundRect(new RectF(0, 0, width, height), mRoundRectRx, mRoundRectRy, mShapePaint);
+  }
+
+  private void drawTriangle(Canvas canvas) {
+    Rect bounds = canvas.getClipBounds();
+    Path triangle = new Path();
+    triangle.moveTo(bounds.left + bounds.right / 10, bounds.bottom - bounds.bottom / 5);
+    triangle.lineTo(bounds.left + (bounds.right - bounds.left) / 2, bounds.top);
+    triangle.lineTo(bounds.right - bounds.right / 10, bounds.bottom - bounds.bottom / 5);
+    triangle.lineTo(bounds.left + bounds.right / 10, bounds.bottom - bounds.bottom / 5);
+
+    mShapePaint.setColor(mShapeColor);
+    mShapePaint.setStyle(Paint.Style.FILL);
+    canvas.drawPath(triangle, mShapePaint);
   }
 
   private void drawLetter(Canvas canvas, float cx, float cy) {
