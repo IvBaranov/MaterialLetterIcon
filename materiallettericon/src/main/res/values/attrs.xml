@@ -6,6 +6,7 @@
       <enum name="circle" value="0"/>
       <enum name="rect" value="1"/>
       <enum name="round_rect" value="2"/>
+      <enum name="triangle" value="3"/>
     </attr>
     <attr name="mli_letter" format="string"/>
     <attr name="mli_letter_color" format="color"/>
