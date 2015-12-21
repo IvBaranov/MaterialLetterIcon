@@ -16,14 +16,12 @@ import android.view.View;
 import com.example.ivbaranov.ma.R;
 
 public class MaterialLetterIcon extends View {
-  public final static int SHAPE_CIRCLE = 0;
-  public final static int SHAPE_RECT = 1;
-  public final static int SHAPE_ROUND_RECT = 2;
-  public final static int SHAPE_TRIANGLE = 3;
+  public enum Shape {CIRCLE, RECT, ROUND_RECT, TRIANGLE}
+
   private final static Rect textBounds = new Rect();
 
   private final static int DEFAULT_SHAPE_COLOR = Color.BLACK;
-  private final static int DEFAULT_SHAPE = SHAPE_CIRCLE;
+  private final static Shape DEFAULT_SHAPE = Shape.CIRCLE;
   private final static int DEFAULT_LETTER_COLOR = Color.WHITE;
   private final static int DEFAULT_LETTER_SIZE = 26;
   private final static String DEFAULT_FONT_PATH = "fonts/Roboto-Light.ttf";
@@ -36,7 +34,7 @@ public class MaterialLetterIcon extends View {
   private Paint mShapePaint;
   private Paint mLetterPaint;
   private int mShapeColor;
-  private int mShapeType;
+  private Shape mShapeType;
   private String mLetter;
   private int mLetterColor;
   private int mLetterSize;
@@ -127,7 +125,8 @@ public class MaterialLetterIcon extends View {
         if (mOriginalLetter != null) {
           setLetter(mOriginalLetter);
         }
-        mShapeType = attr.getInt(R.styleable.MaterialLetterIcon_mli_shape_type, DEFAULT_SHAPE);
+        mShapeType = Shape.values()[attr.getInt(R.styleable.MaterialLetterIcon_mli_shape_type,
+            DEFAULT_SHAPE.ordinal())];
         mLetterColor =
             attr.getColor(R.styleable.MaterialLetterIcon_mli_letter_color, DEFAULT_LETTER_COLOR);
         mLetterSize =
@@ -159,16 +158,16 @@ public class MaterialLetterIcon extends View {
       radius = viewWidthHalf;
     }
     switch (mShapeType) {
-      case SHAPE_CIRCLE:
+      case CIRCLE:
         drawCircle(canvas, radius, viewWidthHalf, viewHeightHalf);
         break;
-      case SHAPE_RECT:
+      case RECT:
         drawRect(canvas, this.getMeasuredWidth(), this.getMeasuredWidth());
         break;
-      case SHAPE_ROUND_RECT:
+      case ROUND_RECT:
         drawRoundRect(canvas, this.getMeasuredWidth(), this.getMeasuredWidth());
         break;
-      case SHAPE_TRIANGLE:
+      case TRIANGLE:
         drawTriangle(canvas);
         break;
     }
@@ -232,11 +231,12 @@ public class MaterialLetterIcon extends View {
   /**
    * Sets shape type.
    *
-   * @param type one of shapes to draw: {@code MaterialLetterIcon.SHAPE_CIRCLE} or {@code
-   * MaterialLetterIcon.SHAPE_RECT}
+   * @param shapeType one of shapes to draw: {@code MaterialLetterIcon.Shape.CIRCLE}, {@code
+   * MaterialLetterIcon.Shape.RECT}, {@code MaterialLetterIcon.Shape.ROUND_RECT}, {@code
+   * MaterialLetterIcon.Shape.TRIANGLE}
    */
-  public void setShapeType(int type) {
-    this.mShapeType = type;
+  public void setShapeType(Shape shapeType) {
+    this.mShapeType = shapeType;
     invalidate();
   }
 
@@ -364,7 +364,7 @@ public class MaterialLetterIcon extends View {
     return mShapeColor;
   }
 
-  public int getShapeType() {
+  public Shape getShapeType() {
     return mShapeType;
   }
 
@@ -416,7 +416,7 @@ public class MaterialLetterIcon extends View {
     private final Context context;
 
     private int mShapeColor = DEFAULT_SHAPE_COLOR;
-    private int mShapeType = DEFAULT_SHAPE;
+    private Shape mShapeType = DEFAULT_SHAPE;
     private String mLetter;
     private int mLetterColor = DEFAULT_LETTER_COLOR;
     private int mLetterSize = DEFAULT_LETTER_SIZE;
@@ -437,8 +437,8 @@ public class MaterialLetterIcon extends View {
       return this;
     }
 
-    public Builder shapeType(int type) {
-      this.mShapeType = type;
+    public Builder shapeType(Shape shapeType) {
+      this.mShapeType = shapeType;
       return this;
     }
 
