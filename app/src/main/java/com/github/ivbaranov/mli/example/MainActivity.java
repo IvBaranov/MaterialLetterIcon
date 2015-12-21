@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.github.ivbaranov.mli.MaterialLetterIcon;
+import com.github.ivbaranov.mli.MaterialLetterIcon.Shape;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -136,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         case COUNTRIES:
           holder.mIcon.setLettersNumber(3);
           holder.mIcon.setLetterSize(16);
+          holder.mIcon.setShapeType(Shape.RECT);
           break;
       }
       holder.mBoundString = mValues.get(position);
