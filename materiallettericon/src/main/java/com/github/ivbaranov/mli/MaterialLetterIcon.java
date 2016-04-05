@@ -16,6 +16,11 @@ import android.view.View;
 import com.example.ivbaranov.ma.R;
 
 public class MaterialLetterIcon extends View {
+  @Deprecated public final static int SHAPE_CIRCLE = 0;
+  @Deprecated public final static int SHAPE_RECT = 1;
+  @Deprecated public final static int SHAPE_ROUND_RECT = 2;
+  @Deprecated public final static int SHAPE_TRIANGLE = 3;
+
   public enum Shape {CIRCLE, RECT, ROUND_RECT, TRIANGLE}
 
   private final static Rect textBounds = new Rect();
@@ -229,6 +234,18 @@ public class MaterialLetterIcon extends View {
   }
 
   /**
+   * Sets shape type. Please use {@code setShapeType(Shape shapeType)} instead.
+   *
+   * @param type one of shapes to draw: {@code MaterialLetterIcon.SHAPE_CIRCLE}, {@code
+   * MaterialLetterIcon.SHAPE_RECT}, {@code MaterialLetterIcon.SHAPE_ROUND_RECT}, {@code
+   * MaterialLetterIcon.SHAPE_TRIANGLE}
+   */
+  @Deprecated public void setShapeType(int type) {
+    this.mShapeType = Shape.values()[0];
+    invalidate();
+  }
+
+  /**
    * Sets shape type.
    *
    * @param shapeType one of shapes to draw: {@code MaterialLetterIcon.Shape.CIRCLE}, {@code
@@ -434,6 +451,11 @@ public class MaterialLetterIcon extends View {
 
     public Builder shapeColor(int color) {
       this.mShapeColor = color;
+      return this;
+    }
+
+    @Deprecated public Builder shapeType(int type) {
+      this.mShapeType = Shape.values()[0];
       return this;
     }
 
