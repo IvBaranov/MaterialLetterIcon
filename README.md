@@ -12,12 +12,14 @@ Variations
 ----------
 ![Library_countries](images/library_countries.png)
 ![Library_countries_rect](images/library_countries_rect.png)
+![Library_round_rect](images/library_round_rect.png)
+![Library_triangle](images/library_triangle.png)
 
 Download
 --------
 
 ```groovy
-compile 'com.github.ivbaranov:materiallettericon:0.2.1'
+compile 'com.github.ivbaranov:materiallettericon:0.2.2'
 ```
 
 
@@ -37,7 +39,7 @@ Or static initializer (see xml attributes below for customization):
 ```java
 MaterialLetterIcon icon = new MaterialLetterIcon.Builder(context) //
             .shapeColor(getResources().getColor(R.color.circle_color))
-            .setShapeType(MaterialLetterIcon.SHAPE_CIRCLE)
+            .setShapeType(SHAPE.CIRCLE)
             .letter("S")
             .letterColor(getResources().getColor(R.color.letter_color))
             .letterSize(26)
@@ -62,6 +64,15 @@ app:mli_initials="false"                // turn on initials mode (takes `mli_let
 app:mli_initials_number="2"             // number of initials to be showed
 ```
 
+Rectangular shape with rounded corners code:
+
+```java
+MaterialLetterIcon icon = new MaterialLetterIcon.Builder(context) //
+            .shapeColor(getResources().getColor(R.color.circle_color))
+            .setShapeType(SHAPE.ROUND_RECT)
+            .setRoundRectRx(8) // default x-corner radius
+            .setRoundRectRy(8) // default x-corner radius
+```
 
 Developed By
 ------------

@@ -8,7 +8,7 @@ android {
     applicationId "com.github.ivbaranov.ma.exmaple"
     minSdkVersion MIN_SDK_VERSION
     targetSdkVersion TARGET_SDK_VERSION
-    versionCode 1
+    versionCode VERSION_CODE.toInteger()
     versionName VERSION_NAME
   }
   buildTypes {
