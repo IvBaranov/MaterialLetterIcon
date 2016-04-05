@@ -20,28 +20,30 @@
 
     <section class="main-content">
       <h1>
-<a id="material-letter-icon" class="anchor" href="#material-letter-icon" aria-hidden="true"><span class="octicon octicon-link"></span></a>Material Letter Icon</h1>
+<a id="material-letter-icon" class="anchor" href="#material-letter-icon" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Material Letter Icon</h1>
 
 <p>Material letter icon with shape background. Replicates android L contacts icon view.</p>
 
 <p><a href="http://android-arsenal.com/details/1/2633"><img src="https://img.shields.io/badge/Android%20Arsenal-MaterialLetterIcon-brightgreen.svg?style=flat" alt="Android Arsenal"></a> <a href="https://travis-ci.org/IvBaranov/MaterialLetterIcon"><img src="https://travis-ci.org/IvBaranov/MaterialLetterIcon.svg" alt="Build Status"></a></p>
 
-<p><img src="https://github.com/IvBaranov/MaterialLetterIcon/raw/master/images/library.png" alt="Library">
-<img src="https://github.com/IvBaranov/MaterialLetterIcon/raw/master/images/lollipop.png" alt="Lollipop"></p>
+<p><img src="images/library.png" alt="Library">
+<img src="images/lollipop.png" alt="Lollipop"></p>
 
 <h2>
-<a id="variations" class="anchor" href="#variations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Variations</h2>
+<a id="variations" class="anchor" href="#variations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Variations</h2>
 
-<p><img src="https://github.com/IvBaranov/MaterialLetterIcon/raw/master/images/library_countries.png" alt="Library_countries">
-<img src="https://github.com/IvBaranov/MaterialLetterIcon/raw/master/images/library_countries_rect.png" alt="Library_countries_rect"></p>
-
-<h2>
-<a id="download" class="anchor" href="#download" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download</h2>
-
-<div class="highlight highlight-source-groovy"><pre>compile <span class="pl-s"><span class="pl-pds">'</span>com.github.ivbaranov:materiallettericon:0.2.1<span class="pl-pds">'</span></span></pre></div>
+<p><img src="images/library_countries.png" alt="Library_countries">
+<img src="images/library_countries_rect.png" alt="Library_countries_rect">
+<img src="images/library_round_rect.png" alt="Library_round_rect">
+<img src="images/library_triangle.png" alt="Library_triangle"></p>
 
 <h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a id="download" class="anchor" href="#download" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Download</h2>
+
+<div class="highlight highlight-source-groovy"><pre>compile <span class="pl-s"><span class="pl-pds">'</span>com.github.ivbaranov:materiallettericon:0.2.2<span class="pl-pds">'</span></span></pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>Declare in XML (see xml attributes below for customization):</p>
 
@@ -53,7 +55,7 @@
 
 <div class="highlight highlight-source-java"><pre><span class="pl-smi">MaterialLetterIcon</span> icon <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">MaterialLetterIcon</span>.<span class="pl-smi">Builder</span>(context) <span class="pl-c">//</span>
             .shapeColor(getResources()<span class="pl-k">.</span>getColor(<span class="pl-smi">R</span><span class="pl-k">.</span>color<span class="pl-k">.</span>circle_color))
-            .setShapeType(<span class="pl-smi">MaterialLetterIcon</span><span class="pl-c1"><span class="pl-k">.</span>SHAPE_CIRCLE</span>)
+            .setShapeType(<span class="pl-c1">SHAPE<span class="pl-k">.</span>CIRCLE</span>)
             .letter(<span class="pl-s"><span class="pl-pds">"</span>S<span class="pl-pds">"</span></span>)
             .letterColor(getResources()<span class="pl-k">.</span>getColor(<span class="pl-smi">R</span><span class="pl-k">.</span>color<span class="pl-k">.</span>letter_color))
             .letterSize(<span class="pl-c1">26</span>)
@@ -65,22 +67,30 @@
 
 <p>Configure using xml attributes or setters in code:</p>
 
-<div class="highlight highlight-source-java"><pre>app<span class="pl-k">:</span>mli_shape_color<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>@color/black<span class="pl-pds">"</span></span>      <span class="pl-c">// shape color</span>
-app<span class="pl-k">:</span>mli_shape_type<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>circle<span class="pl-pds">"</span></span>             <span class="pl-c">// shape type</span>
-app<span class="pl-k">:</span>mli_letter<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>                       <span class="pl-c">// letter or string to get first letter from</span>
+<div class="highlight highlight-source-java"><pre>app<span class="pl-k">:</span>mli_shape_color<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>@color/black<span class="pl-pds">"</span></span>      <span class="pl-c">// shape color resource</span>
+app<span class="pl-k">:</span>mli_shape_type<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>circle<span class="pl-pds">"</span></span>             <span class="pl-c">// shape type (circle or rectangle)</span>
+app<span class="pl-k">:</span>mli_letter<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>                       <span class="pl-c">// letter, string or initials to get letters from</span>
 app<span class="pl-k">:</span>mli_letter_color<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>@color/white<span class="pl-pds">"</span></span>     <span class="pl-c">// letter color</span>
 app<span class="pl-k">:</span>mli_letter_size<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>26<span class="pl-pds">"</span></span>                <span class="pl-c">// letter size SP</span>
-app<span class="pl-k">:</span>mli_letters_number<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>              <span class="pl-c">// number of letters to get from string</span>
-app<span class="pl-k">:</span>mli_initials<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span>                <span class="pl-c">// turn on initials mode</span>
+app<span class="pl-k">:</span>mli_letters_number<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>              <span class="pl-c">// number of letters to get from `mli_letter`</span>
+app<span class="pl-k">:</span>mli_initials<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span>                <span class="pl-c">// turn on initials mode (takes `mli_letters_number` of letters of each word in `mli_letter`)</span>
 app<span class="pl-k">:</span>mli_initials_number<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>             <span class="pl-c">// number of initials to be showed</span></pre></div>
 
+<p>Rectangular shape with rounded corners code:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">MaterialLetterIcon</span> icon <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">MaterialLetterIcon</span>.<span class="pl-smi">Builder</span>(context) <span class="pl-c">//</span>
+            .shapeColor(getResources()<span class="pl-k">.</span>getColor(<span class="pl-smi">R</span><span class="pl-k">.</span>color<span class="pl-k">.</span>circle_color))
+            .setShapeType(<span class="pl-c1">SHAPE<span class="pl-k">.</span>ROUND_RECT</span>)
+            .setRoundRectRx(<span class="pl-c1">8</span>) <span class="pl-c">// default x-corner radius</span>
+            .setRoundRectRy(<span class="pl-c1">8</span>) <span class="pl-c">// default x-corner radius</span></pre></div>
+
 <h2>
-<a id="developed-by" class="anchor" href="#developed-by" aria-hidden="true"><span class="octicon octicon-link"></span></a>Developed By</h2>
+<a id="developed-by" class="anchor" href="#developed-by" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Developed By</h2>
 
 <p>Ivan Baranov</p>
 
 <h2>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
 
 <pre><code>Copyright 2015 Ivan Baranov
 
