@@ -27,7 +27,7 @@ public class MaterialLetterIcon extends View {
   private final static String DEFAULT_FONT_PATH = "fonts/Roboto-Light.ttf";
   private final static int DEFAULT_LETTERS_NUMBER = 1;
   private final static boolean DEFAULT_INITIALS_STATE = false;
-  private final static int DEFAULT_INITIALS_NUMBER = 8;
+  private final static int DEFAULT_INITIALS_NUMBER = 2;
   private final static float DEFAULT_ROUND_RECT_RADIUS = 8;
 
   private Context context;
