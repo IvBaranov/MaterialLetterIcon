@@ -2,6 +2,9 @@
 <resources>
   <declare-styleable name="MaterialLetterIcon">
     <attr name="mli_shape_color" format="color"/>
+    <attr name="mli_border" format="boolean"/>
+    <attr name="mli_border_color" format="color"/>
+    <attr name="mli_border_size" format="integer"/>
     <attr name="mli_shape_type" format="enum">
       <enum name="circle" value="0"/>
       <enum name="rect" value="1"/>

@@ -26,6 +26,9 @@ public class MaterialLetterIcon extends View {
   private final static Rect textBounds = new Rect();
 
   private final static int DEFAULT_SHAPE_COLOR = Color.BLACK;
+  private final static boolean DEFAULT_BORDER = false;
+  private final static int DEFAULT_BORDER_COLOR = Color.BLACK;
+  private final static int DEFAULT_BORDER_SIZE = 2;
   private final static Shape DEFAULT_SHAPE = Shape.CIRCLE;
   private final static int DEFAULT_LETTER_COLOR = Color.WHITE;
   private final static int DEFAULT_LETTER_SIZE = 26;
@@ -37,8 +40,12 @@ public class MaterialLetterIcon extends View {
 
   private Context context;
   private Paint mShapePaint;
+  private Paint mBorderPaint;
   private Paint mLetterPaint;
   private int mShapeColor;
+  private boolean mBorder;
+  private int mBorderColor;
+  private int mBorderSize;
   private Shape mShapeType;
   private String mLetter;
   private int mLetterColor;
@@ -79,6 +86,9 @@ public class MaterialLetterIcon extends View {
    * Initialize the default values
    * <ul>
    * <li>shape color = black</li>
+   * <li>border = false</li>
+   * <li>border color = black</li>
+   * <li>border size = 2 dp/li>
    * <li>shape type = circle</li>
    * <li>letter color = white</li>
    * <li>letter size = 26 sp</li>
@@ -94,6 +104,9 @@ public class MaterialLetterIcon extends View {
     this.context = context;
 
     mShapeColor = DEFAULT_SHAPE_COLOR;
+    mBorder = DEFAULT_BORDER;
+    mBorderColor = DEFAULT_BORDER_COLOR;
+    mBorderSize = DEFAULT_BORDER_SIZE;
     mShapeType = DEFAULT_SHAPE;
     mLetterColor = DEFAULT_LETTER_COLOR;
     mLetterSize = DEFAULT_LETTER_SIZE;
@@ -106,6 +119,10 @@ public class MaterialLetterIcon extends View {
     mShapePaint = new Paint();
     mShapePaint.setStyle(Paint.Style.FILL);
     mShapePaint.setAntiAlias(true);
+
+    mBorderPaint = new Paint();
+    mBorderPaint.setStyle(Paint.Style.STROKE);
+    mBorderPaint.setAntiAlias(true);
 
     mLetterPaint = new Paint();
     mLetterPaint.setAntiAlias(true);
@@ -122,6 +139,11 @@ public class MaterialLetterIcon extends View {
       try {
         mShapeColor =
             attr.getColor(R.styleable.MaterialLetterIcon_mli_shape_color, DEFAULT_SHAPE_COLOR);
+        mBorder = attr.getBoolean(R.styleable.MaterialLetterIcon_mli_border, DEFAULT_BORDER);
+        mBorderColor =
+            attr.getColor(R.styleable.MaterialLetterIcon_mli_border_color, DEFAULT_BORDER_COLOR);
+        mBorderSize =
+            attr.getInt(R.styleable.MaterialLetterIcon_mli_border_size, DEFAULT_BORDER_SIZE);
         mInitials =
             attr.getBoolean(R.styleable.MaterialLetterIcon_mli_initials, DEFAULT_INITIALS_STATE);
         mInitialsNumber = attr.getInt(R.styleable.MaterialLetterIcon_mli_initials_number,
@@ -184,16 +206,44 @@ public class MaterialLetterIcon extends View {
   private void drawCircle(Canvas canvas, int radius, int width, int height) {
     mShapePaint.setColor(mShapeColor);
     canvas.drawCircle(width, height, radius, mShapePaint);
+    if (mBorder) {
+      final int borderPx = dpToPx(mBorderSize, context.getResources());
+      mBorderPaint.setColor(mBorderColor);
+      mBorderPaint.setStrokeWidth(dpToPx(mBorderSize, context.getResources()));
+      canvas.drawCircle(width, height, radius - borderPx / 2, mBorderPaint);
+    }
   }
 
   private void drawRect(Canvas canvas, int width, int height) {
     mShapePaint.setColor(mShapeColor);
     canvas.drawRect(0, 0, width, height, mShapePaint);
+    if (mBorder) {
+      final int borderPx = dpToPx(mBorderSize, context.getResources());
+      mBorderPaint.setColor(mBorderColor);
+      mBorderPaint.setStrokeWidth(dpToPx(mBorderSize, context.getResources()));
+      canvas.drawRect(borderPx / 2, borderPx / 2, width - borderPx / 2, height - borderPx / 2,
+          mBorderPaint);
+    }
   }
 
   private void drawRoundRect(Canvas canvas, float width, float height) {
     mShapePaint.setColor(mShapeColor);
-    canvas.drawRoundRect(new RectF(0, 0, width, height), mRoundRectRx, mRoundRectRy, mShapePaint);
+    int rectRxPx = dpToPx(mRoundRectRx, context.getResources());
+    int rectRyPx = dpToPx(mRoundRectRy, context.getResources());
+    if (mBorder) {
+      final int borderPx = dpToPx(mBorderSize, context.getResources());
+      canvas.drawRoundRect(
+          new RectF(borderPx / 2, borderPx / 2, width - borderPx / 2, height - borderPx / 2),
+          rectRxPx, rectRyPx, mShapePaint);
+
+      mBorderPaint.setColor(mBorderColor);
+      mBorderPaint.setStrokeWidth(dpToPx(mBorderSize, context.getResources()));
+      canvas.drawRoundRect(
+          new RectF(borderPx / 2, borderPx / 2, width - borderPx / 2, height - borderPx / 2),
+          rectRxPx, rectRyPx, mBorderPaint);
+    } else {
+      canvas.drawRoundRect(new RectF(0, 0, width, height), rectRxPx, rectRyPx, mShapePaint);
+    }
   }
 
   private void drawTriangle(Canvas canvas) {
@@ -230,6 +280,36 @@ public class MaterialLetterIcon extends View {
    */
   public void setShapeColor(int color) {
     this.mShapeColor = color;
+    invalidate();
+  }
+
+  /**
+   * Sets border to shape.
+   *
+   * @param border if true, draws shape with border
+   */
+  public void setBorder(boolean border) {
+    this.mBorder = border;
+    invalidate();
+  }
+
+  /**
+   * Sets border color.
+   *
+   * @param color a color integer associated with a particular resource id
+   */
+  public void setBorderColor(int color) {
+    this.mBorderColor = color;
+    invalidate();
+  }
+
+  /**
+   * Set size of border.
+   *
+   * @param borderSize size of border in DP
+   */
+  public void setBorderSize(int borderSize) {
+    this.mBorderSize = borderSize;
     invalidate();
   }
 
@@ -373,6 +453,22 @@ public class MaterialLetterIcon extends View {
     return mShapePaint;
   }
 
+  public Paint getBorderPaint() {
+    return mBorderPaint;
+  }
+
+  public boolean hasBorder() {
+    return mBorder;
+  }
+
+  public int getBorderColor() {
+    return mBorderColor;
+  }
+
+  public int getBorderSize() {
+    return mBorderSize;
+  }
+
   public Paint getLetterPaint() {
     return mLetterPaint;
   }
@@ -427,6 +523,15 @@ public class MaterialLetterIcon extends View {
   }
 
   /**
+   * Convert dp to pixel.
+   */
+  private static int dpToPx(float dp, Resources resources) {
+    float px =
+        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
+    return (int) px;
+  }
+
+  /**
    * Builder.
    */
   public static final class Builder {
@@ -434,6 +539,9 @@ public class MaterialLetterIcon extends View {
 
     private int mShapeColor = DEFAULT_SHAPE_COLOR;
     private Shape mShapeType = DEFAULT_SHAPE;
+    private boolean mBorder = DEFAULT_BORDER;
+    private int mBorderColor = DEFAULT_BORDER_COLOR;
+    private int mBorderSize = DEFAULT_BORDER_SIZE;
     private String mLetter;
     private int mLetterColor = DEFAULT_LETTER_COLOR;
     private int mLetterSize = DEFAULT_LETTER_SIZE;
@@ -461,6 +569,21 @@ public class MaterialLetterIcon extends View {
 
     public Builder shapeType(Shape shapeType) {
       this.mShapeType = shapeType;
+      return this;
+    }
+
+    public Builder border(boolean border) {
+      this.mBorder = border;
+      return this;
+    }
+
+    public Builder borderColor(int borderColor) {
+      this.mBorderColor = borderColor;
+      return this;
+    }
+
+    public Builder borderSize(int borderSize) {
+      this.mBorderSize = borderSize;
       return this;
     }
 
@@ -513,6 +636,9 @@ public class MaterialLetterIcon extends View {
       MaterialLetterIcon icon = new MaterialLetterIcon(context);
       icon.setShapeColor(mShapeColor);
       icon.setShapeType(mShapeType);
+      icon.setBorder(mBorder);
+      icon.setBorderColor(mBorderColor);
+      icon.setBorderSize(mBorderSize);
       icon.setLetter(mLetter);
       icon.setLetterColor(mLetterColor);
       icon.setLetterSize(mLetterSize);
