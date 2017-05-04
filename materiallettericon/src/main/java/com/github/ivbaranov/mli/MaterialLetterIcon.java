@@ -33,7 +33,7 @@ public class MaterialLetterIcon extends View {
   private final static int DEFAULT_LETTERS_NUMBER = 1;
   private final static boolean DEFAULT_INITIALS_STATE = false;
   private final static int DEFAULT_INITIALS_NUMBER = 2;
-  private final static float DEFAULT_ROUND_RECT_RADIUS = 8;
+  private final static float DEFAULT_ROUND_RECT_RADIUS = 2;
 
   private Context context;
   private Paint mShapePaint;
@@ -86,8 +86,8 @@ public class MaterialLetterIcon extends View {
    * <li>typeface = Roboto Light</li>
    * <li>initials = false</li>
    * <li>initials number = 2</li>
-   * <li>round-rect x radius = 8</li>
-   * <li>round-rect y radius = 8</li>
+   * <li>round-rect x radius = 2 dp</li>
+   * <li>round-rect y radius = 2 dp</li>
    * </ul>
    */
   private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -409,11 +409,11 @@ public class MaterialLetterIcon extends View {
     return mInitialsNumber;
   }
 
-  public float getmRoundRectRx() {
+  public float getRoundRectRx() {
     return mRoundRectRx;
   }
 
-  public float getmRoundRectRy() {
+  public float getRoundRectRy() {
     return mRoundRectRy;
   }
 
