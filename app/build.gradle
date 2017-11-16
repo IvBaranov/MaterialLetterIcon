@@ -5,7 +5,7 @@ android {
   buildToolsVersion BUILD_TOOLS_VERSION
 
   defaultConfig {
-    applicationId "com.github.ivbaranov.ma.exmaple"
+    applicationId "com.github.ivbaranov.ma.example"
     minSdkVersion MIN_SDK_VERSION
     targetSdkVersion TARGET_SDK_VERSION
     versionCode VERSION_CODE.toInteger()

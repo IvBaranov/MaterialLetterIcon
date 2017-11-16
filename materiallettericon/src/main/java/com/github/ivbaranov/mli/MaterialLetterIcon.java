@@ -347,6 +347,7 @@ public class MaterialLetterIcon extends View {
       return;
     }
 
+    string = string.trim();
     this.mOriginalLetter = string;
 
     int desireLength;
