@@ -19,7 +19,7 @@ Download
 --------
 
 ```groovy
-compile 'com.github.ivbaranov:materiallettericon:0.2.2'
+compile 'com.github.ivbaranov:materiallettericon:0.2.3'
 ```
 
 
