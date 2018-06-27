@@ -39,7 +39,7 @@ Or static initializer (see xml attributes below for customization):
 ```java
 MaterialLetterIcon icon = new MaterialLetterIcon.Builder(context) //
             .shapeColor(getResources().getColor(R.color.circle_color))
-            .setShapeType(SHAPE.CIRCLE)
+            .shapeType(SHAPE.CIRCLE)
             .letter("S")
             .letterColor(getResources().getColor(R.color.letter_color))
             .letterSize(26)
@@ -69,9 +69,9 @@ Rectangular shape with rounded corners code:
 ```java
 MaterialLetterIcon icon = new MaterialLetterIcon.Builder(context) //
             .shapeColor(getResources().getColor(R.color.circle_color))
-            .setShapeType(SHAPE.ROUND_RECT)
-            .setRoundRectRx(8) // default x-corner radius
-            .setRoundRectRy(8) // default x-corner radius
+            .shapeType(SHAPE.ROUND_RECT)
+            .roundRectRx(8) // default x-corner radius
+            .roundRectRy(8) // default x-corner radius
 ```
 
 Developed By
