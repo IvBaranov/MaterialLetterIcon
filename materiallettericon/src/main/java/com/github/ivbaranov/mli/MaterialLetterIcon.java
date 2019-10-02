@@ -343,11 +343,14 @@ public class MaterialLetterIcon extends View {
    * @param string a string to take letters from
    */
   public void setLetter(String string) {
-    if (string == null || string.isEmpty()) {
+    if (string == null) {
+      return;
+    }
+    string = string.trim();
+    if (string.isEmpty()) {
       return;
     }
 
-    string = string.trim();
     this.mOriginalLetter = string;
 
     int desireLength;
